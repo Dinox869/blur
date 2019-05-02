@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "192518679454",
+    "firebase_url": "https://blur-ca5d8.firebaseio.com",
+    "project_id": "blur-ca5d8",
+    "storage_bucket": "blur-ca5d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192518679454:android:109ed37a47bdcc9d",
+        "android_client_info": {
+          "package_name": "first.gift.recon.blur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192518679454-tjre5g2fuq1odu3sit8f1lk86tp5qv59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "first.gift.recon.blur",
+            "certificate_hash": "f2a9fbe2360a48efd07e14e32085a6dd8ad29a54"
+          }
+        },
+        {
+          "client_id": "192518679454-orpbaecir53pheclttnpccikb7cb9do8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSjC4rr8E0BuakfMfAZ8m68z0i69h-TsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192518679454-orpbaecir53pheclttnpccikb7cb9do8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
