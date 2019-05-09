@@ -23,6 +23,23 @@ class second extends StatefulWidget
 }
 
 class seconds extends State<second> {
+
+  NImage(url){
+    if(url = null){
+      return Hero(
+          tag: NetworkImage(url),
+          child: FadeInImage(
+              placeholder: new AssetImage("assets/person.jpg"),
+              image: NetworkImage(url))
+      );
+    }
+    else
+      {
+        return NetworkImage(url);
+      }
+  }
+
+
   status(follow){
     if(follow == "Unfollow"){
       return Text("Following",style: TextStyle(
@@ -56,42 +73,58 @@ class seconds extends State<second> {
             );
           default:
             return Scaffold(
-              body: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(widget.Name,style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                          fontSize: 20.0
-                      ),
-                      )
-                    ],
-                  ),
-                  Center(
-                    child: Container(
-                      height: 200,
-                      width: 200,
-              decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(widget.Url),fit: BoxFit.cover
+              appBar: AppBar(
+                title: Text(widget.Name,style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0
                 ),
+                ),
+              centerTitle: true,
               ),
+              body: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey
+                ),
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 25.0),
+                    Center(
+                      child: Container(
+                        height: 400,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: NImage(widget.Url)
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      status(widget.Status)
-                    ],
-                  ),
-                  ListView(
-                    padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                    primary: false,
-                    shrinkWrap: true,
-                    children:buildList(snapshot.data.documents,context)
-                  )
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        status(widget.Status)
+                      ],
+                    ),
+                    SizedBox(height: 25),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white30
+                      ),
+                      child: ListView.separated(
+                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                          primary: false,
+                          shrinkWrap: true,
+                          separatorBuilder: (BuildContext context, int index)=> Divider(height: 0.0),
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (BuildContext context, int index)
+                          {
+                            buildList(snapshot.data.documents,context) ;
+                          },
+
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
         }
@@ -100,7 +133,7 @@ class seconds extends State<second> {
   }
 }
 List<Widget> buildList(List<DocumentSnapshot> documents,BuildContext context){
-  int i ;
+
   List<Widget> _list = [];
   for(DocumentSnapshot document in documents )
   {
@@ -118,5 +151,6 @@ Widget buildListItem(DocumentSnapshot document, BuildContext context){
     onTap: (){
       //
     },
+
   );
 }

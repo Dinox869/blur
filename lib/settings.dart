@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:blur/loginview.dart';
 
 class settings extends StatelessWidget{
   @override
@@ -7,7 +8,12 @@ class settings extends StatelessWidget{
       body: Center(
         child: Column(
           children: <Widget>[
-            Text("Settngs")
+            Text("Settngs"),
+            RaisedButton(onPressed: (){
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>
+                  loginview()
+              ));
+            })
           ],
         ),
       ),

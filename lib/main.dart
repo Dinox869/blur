@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:blur/loginview.dart';
-import 'package:blur/finds.dart';
 import 'package:blur/research.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blur/profile.dart';
@@ -135,7 +134,7 @@ class MyHomePage extends StatefulWidget
                           //
                        //   _SignIn().then((FirebaseUser user)=>print(user)).catchError((e)=>print(e));
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                          finds()
+                          research()
                           ));
                         },
                       ),

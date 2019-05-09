@@ -47,11 +47,11 @@ class _HomePageState extends State<research> {
       case 0:
         return first();
       case 1:
-        return home();
+        return profile();
       case 2:
         return home();
       case 3:
-        return home();
+        return settings();
     }
 
     throw "Invalid index $index";
