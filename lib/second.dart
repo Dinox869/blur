@@ -94,7 +94,7 @@ class seconds extends State<second> {
                         height: 400,
                         width: 400,
                         decoration: BoxDecoration(
-                          image: DecorationImage(image: NImage(widget.Url)
+                          image: DecorationImage(image: NetworkImage(widget.Url)
                           ),
                         ),
                       ),
@@ -110,17 +110,11 @@ class seconds extends State<second> {
                       decoration: BoxDecoration(
                         color: Colors.white30
                       ),
-                      child: ListView.separated(
+                      child: ListView(
                           padding: EdgeInsets.only(left: 15.0, right: 15.0),
                           primary: false,
                           shrinkWrap: true,
-                          separatorBuilder: (BuildContext context, int index)=> Divider(height: 0.0),
-                          itemCount: snapshot.data.documents.length,
-                          itemBuilder: (BuildContext context, int index)
-                          {
-                            buildList(snapshot.data.documents,context) ;
-                          },
-
+                           children: buildList(snapshot.data.documents,context)
                       ),
                     )
                   ],
@@ -142,15 +136,18 @@ List<Widget> buildList(List<DocumentSnapshot> documents,BuildContext context){
   return _list;
 }
 Widget buildListItem(DocumentSnapshot document, BuildContext context){
-  return ListTile(
-    title: Text(
-      document.documentID,style: TextStyle(color: Colors.black,
-    fontWeight: FontWeight.bold,fontSize: 16.0
-    ),),
-    trailing: Icon(Icons.keyboard_arrow_right),
-    onTap: (){
-      //
-    },
+  return Container(
+    child: ListTile(
+      title: Text(
+        document.documentID,style: TextStyle(color: Colors.black,
+          fontWeight: FontWeight.bold,fontSize: 16.0
+      ),),
+      trailing: Icon(Icons.keyboard_arrow_right),
+      onTap: (){
+        //
+      },
 
+    )
   );
+
 }
