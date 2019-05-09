@@ -85,8 +85,12 @@ class seconds extends State<second> {
                       status(widget.Status)
                     ],
                   ),
-
-
+                  ListView(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                    primary: false,
+                    shrinkWrap: true,
+                    children:buildList(snapshot.data.documents,context)
+                  )
                 ],
               ),
             );
@@ -94,5 +98,25 @@ class seconds extends State<second> {
       },
     );
   }
-
+}
+List<Widget> buildList(List<DocumentSnapshot> documents,BuildContext context){
+  int i ;
+  List<Widget> _list = [];
+  for(DocumentSnapshot document in documents )
+  {
+    _list.add(buildListItem(document,context));
+  }
+  return _list;
+}
+Widget buildListItem(DocumentSnapshot document, BuildContext context){
+  return ListTile(
+    title: Text(
+      document.documentID,style: TextStyle(color: Colors.black,
+    fontWeight: FontWeight.bold,fontSize: 16.0
+    ),),
+    trailing: Icon(Icons.keyboard_arrow_right),
+    onTap: (){
+      //
+    },
+  );
 }
