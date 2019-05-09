@@ -23,6 +23,23 @@ class second extends StatefulWidget
 }
 
 class seconds extends State<second> {
+  status(follow){
+    if(follow == "Unfollow"){
+      return Text("Following",style: TextStyle(
+        color: Colors.blue,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold
+      ),
+      );
+    }else{
+      return Text("Follow",style: TextStyle(
+          color: Colors.blue,
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold
+      ),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
@@ -62,6 +79,13 @@ class seconds extends State<second> {
               ),
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      status(widget.Status)
+                    ],
+                  ),
+
 
                 ],
               ),
