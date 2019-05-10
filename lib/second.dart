@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:blur/third.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -24,20 +24,20 @@ class second extends StatefulWidget
 
 class seconds extends State<second> {
 
-  NImage(url){
-    if(url = null){
-      return Hero(
-          tag: NetworkImage(url),
-          child: FadeInImage(
-              placeholder: new AssetImage("assets/person.jpg"),
-              image: NetworkImage(url))
-      );
-    }
-    else
-      {
-        return NetworkImage(url);
-      }
-  }
+//  NImage(url){
+//    if(url = null){
+//      return Hero(
+//          tag: NetworkImage(url),
+//          child: FadeInImage(
+//              placeholder: new AssetImage("assets/person.jpg"),
+//              image: NetworkImage(url))
+//      );
+//    }
+//    else
+//      {
+//        return NetworkImage(url);
+//      }
+//  }
 
 
   status(follow){
@@ -60,7 +60,7 @@ class seconds extends State<second> {
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection("clients").snapshots(),
+      stream: Firestore.instance.collection("Dennis").snapshots(),
       builder: (BuildContext context,
       AsyncSnapshot<QuerySnapshot> snapshot){
         if(snapshot.hasError)
@@ -114,7 +114,7 @@ class seconds extends State<second> {
                           padding: EdgeInsets.only(left: 15.0, right: 15.0),
                           primary: false,
                           shrinkWrap: true,
-                           children: buildList(snapshot.data.documents,context)
+                           children: buildList(snapshot.data.documents,context,widget.Name)
                       ),
                     )
                   ],
@@ -126,16 +126,16 @@ class seconds extends State<second> {
     );
   }
 }
-List<Widget> buildList(List<DocumentSnapshot> documents,BuildContext context){
+List<Widget> buildList(List<DocumentSnapshot> documents,BuildContext context, String name){
 
   List<Widget> _list = [];
   for(DocumentSnapshot document in documents )
   {
-    _list.add(buildListItem(document,context));
+    _list.add(buildListItem(document,context,name));
   }
   return _list;
 }
-Widget buildListItem(DocumentSnapshot document, BuildContext context){
+Widget buildListItem(DocumentSnapshot document, BuildContext context,String name){
   return Container(
     child: ListTile(
       title: Text(
@@ -144,7 +144,12 @@ Widget buildListItem(DocumentSnapshot document, BuildContext context){
       ),),
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: (){
-        //
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>
+        third(
+          Name: name,
+          Doc: document.documentID,
+        )
+        ));
       },
 
     )
