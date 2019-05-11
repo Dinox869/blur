@@ -23,7 +23,99 @@ class third extends StatefulWidget
 
 class thirds extends State<third>
 {
-  int i = 0;
+ final _list = [];
+  int counts;
+  var document;
+  @override
+
+
+
+
+  Widget buildList(String doc,String docs){
+    return new ListTile(
+      title: Text(doc,
+      ),
+      trailing: FlatButton(
+          onPressed: (){
+            _showAlert(docs);
+          },
+          child: Text("Buy Item",
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 12.0,
+                decoration: TextDecoration.underline
+            ),
+          )),
+    );
+  }
+  _showAlert(String doc)
+  {
+    return showDialog (
+      context: context,
+        barrierDismissible: true,
+        child: AlertDialog(
+          title: new Text("Visit Link"
+          ),
+          content:  Text("Do you wish to visit the web link?"),
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: (){
+                  Navigator.of(context,rootNavigator: true).pop(context);
+                },
+                child: Text("No",style: TextStyle(
+                  color: Colors.red
+                ),
+                )
+            ),
+            new FlatButton(
+                onPressed: (){
+                  _launchUrl(doc);
+                },
+                child: Text("Yes",style: TextStyle(
+                    color: Colors.black
+                ),
+                )
+            ),
+          ],
+        )
+    );
+  }
+  _launchUrl(link) async{
+    if(await canLaunch(link)){
+      await launch(link);
+    }
+    else
+    {
+      throw 'Could not Launch the link';
+
+    }
+  }
+  texting(dod){
+    if(dod !=null){
+      gettting(dod);
+      return Text(widget.Name);
+    }else
+      return null;
+  }
+  Future gettting(String doc) async{
+     document=  await Firestore.instance.collection('Dennis').document(doc).get();
+    return document;
+  }
+ initstate( doc)  {
+
+
+      for(int i = 0 ; i< doc.data.length~/2 ;i++)
+      {
+        _list.add(buildList(doc.data["item$i"],doc.data["link$i"]));
+      }
+
+
+
+  return _list ;
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,87 +134,65 @@ class thirds extends State<third>
             decoration: BoxDecoration(
                 color: Colors.grey
             ),
-                child: ListView(
-                    padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                    shrinkWrap: true,
-                    children: initstate(widget.Doc,context)
+
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                      texting(widget.Doc)
+                        ],
+                      ),
+                    ),
+//                    Expanded(
+//                        child:  ListView.builder(
+//                        itemCount: counts~/2,
+//                        itemBuilder:  (BuildContext context, int index){
+//                          return document.then((DocumentSnapshot doc){
+//
+//                              buildList(doc.data["item$index"],doc.data["link$index"]);
+//
+//                          }
+//                          );
+//                        }
+//                    )
+//                    ),
+                    Expanded(child: FutureBuilder(
+                      future: gettting(widget.Doc) ,
+                        builder: (BuildContext context, AsyncSnapshot snapshot)
+                                  {
+                                  switch(snapshot.connectionState)
+                                  {
+                                  case ConnectionState.waiting:
+                                  return  new Center(
+                                  child: new CircularProgressIndicator()
+                                  );
+                                  default:
+                                    if(snapshot.data != null) {
+                                      for (int i = 0; i < 1;
+                                      i++) {
+                                       return buildList(snapshot.data["item$i"],
+                                            snapshot.data["link$i"]);
+                                      }
+
+                                    }
+                                    else
+                                      {
+                                        return Text("Empty");
+                                      }
+
+
+                                  }
+                                  }
+                                  )
+                    )
+                  ],
+
                 ),
-
-
           )
     );
   }
 
 }
-List<Widget> initstate(String doc,BuildContext context)  {
-  List<Widget> _list = [];
-    var document = Firestore.instance.collection('Dennis').document(doc).get();
-    document.then((DocumentSnapshot doc){
-    for(int i = 0 ; i< doc.data.length/2 ;i++)
-    {
-      _list.add(buildList(doc.data["item$i"],doc.data["link$i"], i,context));
 
-    }
-    return _list;
-  }
-  );
 
-}
-Widget buildList(String doc,String docs, int i,BuildContext context){
-  return new ListTile(
-            contentPadding: EdgeInsets.only(left: 15, right: 25),
-            title: Text(doc,
-            ),
-      trailing: FlatButton(
-          onPressed: (){
-            _showAlert(context,docs);
-          },
-          child: Text("Buy Item",
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 12.0,
-                decoration: TextDecoration.underline
-            ),
-          )),
-          );
-}
-_showAlert(BuildContext context,String doc) async
-{
-  return showDialog(context: context,
-      barrierDismissible: false,
-      child: AlertDialog(
-        title: new Text("Visit Link"
-        ),
-        content:  Text("Do you wish to visit the web link?"),
-        actions: <Widget>[
-          new FlatButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              child: Text("No"
-              )
-          ),
-          new FlatButton(
-              onPressed: (){
-                _launchUrl(doc);
-              },
-              child: Text("Yes",style: TextStyle(
-                  color: Colors.black
-              ),
-              )
-          ),
-        ],
-      )
-  );
-}
-_launchUrl(link) async{
-  if(await canLaunch(link)){
-    await launch(link);
-  }
-  else
-  {
-    throw 'Could not Launch the link';
-
-  }
-}
