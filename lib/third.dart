@@ -40,9 +40,9 @@ class thirds extends State<third>
           onPressed: (){
             _showAlert(docs);
           },
-          child: Text("Buy Item",
+          child: Text("BUY NOW",
             style: TextStyle(
-                color: Colors.black,
+                color: Colors.blue,
                 fontWeight: FontWeight.bold,
                 fontSize: 12.0,
                 decoration: TextDecoration.underline
@@ -96,34 +96,12 @@ class thirds extends State<third>
     else
     {
       throw 'Could not Launch the link';
-
     }
-  }
-  texting(dod){
-    if(dod !=null){
-      gettting(dod);
-      return Text(widget.Name);
-    }else
-      return null;
   }
   Future gettting(String doc) async{
      document=  await Firestore.instance.collection('Dennis').document(doc).get();
     return document;
   }
- initstate( doc)  {
-
-
-      for(int i = 0 ; i< doc.data.length~/2 ;i++)
-      {
-        _list.add(buildList(doc.data["item$i"],doc.data["link$i"]));
-      }
-
-
-
-  return _list ;
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,15 +118,16 @@ class thirds extends State<third>
       ),
       body: Container(
             decoration: BoxDecoration(
-                color: Colors.grey
+                color: Colors.white10
             ),
 
                 child: Column(
                   children: <Widget>[
                     Container(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                      texting(widget.Doc)
+                      Text(widget.Doc)
                         ],
                       ),
                     ),
@@ -184,6 +163,5 @@ class thirds extends State<third>
           )
     );
   }
-
 }
 
