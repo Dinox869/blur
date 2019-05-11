@@ -144,48 +144,39 @@ class thirds extends State<third>
                         ],
                       ),
                     ),
-//                    Expanded(
-//                        child:  ListView.builder(
-//                        itemCount: counts~/2,
-//                        itemBuilder:  (BuildContext context, int index){
-//                          return document.then((DocumentSnapshot doc){
-//
-//                              buildList(doc.data["item$index"],doc.data["link$index"]);
-//
-//                          }
-//                          );
-//                        }
-//                    )
-//                    ),
-                    Expanded(child: FutureBuilder(
-                      future: gettting(widget.Doc) ,
-                        builder: (BuildContext context, AsyncSnapshot snapshot)
-                                  {
-                                  switch(snapshot.connectionState)
-                                  {
-                                  case ConnectionState.waiting:
-                                  return  new Center(
-                                  child: new CircularProgressIndicator()
-                                  );
-                                  default:
-                                    if(snapshot.data != null) {
-                                      for (int i = 0; i < 1;
-                                      i++) {
-                                       return buildList(snapshot.data["item$i"],
-                                            snapshot.data["link$i"]);
-                                      }
-
-                                    }
-                                    else
-                                      {
-                                        return Text("Empty");
-                                      }
+                    Expanded(
+                        child:  ListView.builder(
+                        itemCount: document.data.length~/2,
+                        itemBuilder:  (BuildContext context, int index){
+                         return FutureBuilder(
+                          future: gettting(widget.Doc) ,
+                          builder: (BuildContext context, AsyncSnapshot snapshot)
+                          {
+                          switch(snapshot.connectionState)
+                          {
+                          case ConnectionState.waiting:
+                          return  new Center(
+                          child: new CircularProgressIndicator()
+                          );
+                          default:
+                          if(snapshot.data != null) {
+                         return buildList(snapshot.data["item$index"],
+                          snapshot.data["link$index"]);
+                          }
+                          else
+                          {
+                          return Text("Empty");
+                          }
 
 
-                                  }
-                                  }
-                                  )
+                          }
+
+
+                                                }
+                          );
+                        }
                     )
+                    ),
                   ],
 
                 ),
