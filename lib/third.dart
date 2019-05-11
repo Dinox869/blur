@@ -32,6 +32,7 @@ class thirds extends State<third>
 
 
   Widget buildList(String doc,String docs){
+  if (doc != null){
     return new ListTile(
       title: Text(doc,
       ),
@@ -48,6 +49,13 @@ class thirds extends State<third>
             ),
           )),
     );
+  }
+  else{
+    return null;
+  }
+
+
+
   }
   _showAlert(String doc)
   {
@@ -146,7 +154,7 @@ class thirds extends State<third>
                     ),
                     Expanded(
                         child:  ListView.builder(
-                        itemCount: document.data.length~/2,
+                            itemCount: 2,
                         itemBuilder:  (BuildContext context, int index){
                          return FutureBuilder(
                           future: gettting(widget.Doc) ,
@@ -166,24 +174,16 @@ class thirds extends State<third>
                           else
                           {
                           return Text("Empty");
-                          }
-
-
-                          }
-
-
-                                                }
+                          }}}
                           );
                         }
                     )
                     ),
                   ],
-
                 ),
           )
     );
   }
 
 }
-
 
