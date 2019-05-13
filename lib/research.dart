@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:blur/home.dart';
+import 'package:blur/create.dart';
 import 'package:blur/profile.dart';
 import 'package:blur/first.dart';
 import 'package:blur/settings.dart';
@@ -49,7 +49,7 @@ class _HomePageState extends State<research> {
       case 1:
         return profile();
       case 2:
-        return home();
+        return clean();
       case 3:
         return settings();
     }
