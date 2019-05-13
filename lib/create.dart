@@ -96,6 +96,28 @@ class cleans extends State<clean> {
         )
     );
   }
+  _showOrigin(){
+    return showDialog (
+        context: context,
+        barrierDismissible: true,
+        child: AlertDialog(
+          title: new Text("Error",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18.0),
+          ),
+          content: Text("Incomplete form.Fill the Title section."),
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: (){
+                  Navigator.of(context,rootNavigator: true).pop(context);
+                },
+                child: Text("Cancel",style: TextStyle(
+                    color: Colors.red
+                ),
+                )
+            )
+          ],
+        )
+    );
+  }
   _showTime(){
     return showDialog (
         context: context,
@@ -119,35 +141,54 @@ class cleans extends State<clean> {
     );
   }
 _sending(){
-  final DocumentReference documentReference = Firestore.instance.collection("Dennis").document(title.text);
-  //0
-      if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length>0 && gif1.text.length>0 && gift2.text.length>0 && gif2.text.length>0 && gift3.text.length>0 && gif3.text.length>0 && gift4.text.length>0 && gif4.text.length>0 && gift5.text.length>0 && gif5.text.length>0 && gift6.text.length>0 && gif6.text.length>0 && gift7.text.length>0 && gif7.text.length>0 ) {
-      Map<String,String> data = <String,String>{
-        "item0": gift0.text,
-        "link0": gif0.text,
-        "item1": gift1.text,
-        "link1": gif1.text,
-        "item2": gift2.text,
-        "link2": gif2.text,
-        "item3": gift3.text,
-        "link3": gif3.text,
-        "item4": gift4.text,
-        "link4": gif4.text,
-        "item5": gift5.text,
-        "link5": gif5.text,
-        "item6": gift6.text,
-        "link6": gif6.text,
-        "item7": gift7.text,
-        "link7": gif7.text
-      };
-      documentReference.setData(data).whenComplete(()async{
-       await print("Document Added");
-      }).catchError((e){
-        print(e);
-      });
+    if(title.text.length<= 0){
+      _showOrigin();
+    }
+    else {
+      final DocumentReference documentReference = Firestore.instance.collection(
+          "Dennis").document(title.text);
+      //0
+      if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length > 0 && gif1.text.length > 0 &&
+          gift2.text.length > 0 && gif2.text.length > 0 &&
+          gift3.text.length > 0 && gif3.text.length > 0 &&
+          gift4.text.length > 0 && gif4.text.length > 0 &&
+          gift5.text.length > 0 && gif5.text.length > 0 &&
+          gift6.text.length > 0 && gif6.text.length > 0 &&
+          gift7.text.length > 0 && gif7.text.length > 0) {
+        Map<String, String> data = <String, String>{
+          "item0": gift0.text,
+          "link0": gif0.text,
+          "item1": gift1.text,
+          "link1": gif1.text,
+          "item2": gift2.text,
+          "link2": gif2.text,
+          "item3": gift3.text,
+          "link3": gif3.text,
+          "item4": gift4.text,
+          "link4": gif4.text,
+          "item5": gift5.text,
+          "link5": gif5.text,
+          "item6": gift6.text,
+          "link6": gif6.text,
+          "item7": gift7.text,
+          "link7": gif7.text
+        };
+        documentReference.setData(data).whenComplete(() async {
+          await print("Document Added");
+        }).catchError((e) {
+          print(e);
+        });
       }
-      else  if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length>0 && gif1.text.length>0 && gift2.text.length>0 && gif2.text.length>0 && gift3.text.length>0 && gif3.text.length>0 && gift4.text.length>0 && gif4.text.length>0 && gift5.text.length>0 && gif5.text.length>0 && gift6.text.length>0 && gif6.text.length>0 && gift7.text.length<0 && gif7.text.length<0 ) {
-        Map<String,String> data = <String,String>{
+      else if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length > 0 && gif1.text.length > 0 &&
+          gift2.text.length > 0 && gif2.text.length > 0 &&
+          gift3.text.length > 0 && gif3.text.length > 0 &&
+          gift4.text.length > 0 && gif4.text.length > 0 &&
+          gift5.text.length > 0 && gif5.text.length > 0 &&
+          gift6.text.length > 0 && gif6.text.length > 0 &&
+          gift7.text.length <= 0 && gif7.text.length <= 0) {
+        Map<String, String> data = <String, String>{
           "item0": gift0.text,
           "link0": gif0.text,
           "item1": gift1.text,
@@ -163,14 +204,21 @@ _sending(){
           "item6": gift6.text,
           "link6": gif6.text,
         };
-        documentReference.setData(data).whenComplete(()async{
+        documentReference.setData(data).whenComplete(() async {
           await print("Document Added");
-        }).catchError((e){
+        }).catchError((e) {
           print(e);
         });
       }
-      else  if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length>0 && gif1.text.length>0 && gift2.text.length>0 && gif2.text.length>0 && gift3.text.length>0 && gif3.text.length>0 && gift4.text.length>0 && gif4.text.length>0 && gift5.text.length>0 && gif5.text.length>0 && gift6.text.length<0 && gif6.text.length<0 && gift7.text.length<0 && gif7.text.length<0 ) {
-        Map<String,String> data = <String,String>{
+      else if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length > 0 && gif1.text.length > 0 &&
+          gift2.text.length > 0 && gif2.text.length > 0 &&
+          gift3.text.length > 0 && gif3.text.length > 0 &&
+          gift4.text.length > 0 && gif4.text.length > 0 &&
+          gift5.text.length > 0 && gif5.text.length > 0 &&
+          gift6.text.length <= 0 && gif6.text.length <= 0 &&
+          gift7.text.length <= 0 && gif7.text.length <= 0) {
+        Map<String, String> data = <String, String>{
           "item0": gift0.text,
           "link0": gif0.text,
           "item1": gift1.text,
@@ -184,14 +232,21 @@ _sending(){
           "item5": gift5.text,
           "link5": gif5.text,
         };
-        documentReference.setData(data).whenComplete(()async{
+        documentReference.setData(data).whenComplete(() async {
           await print("Document Added");
-        }).catchError((e){
+        }).catchError((e) {
           print(e);
         });
       }
-      else  if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length>0 && gif1.text.length>0 && gift2.text.length>0 && gif2.text.length>0 && gift3.text.length>0 && gif3.text.length>0 && gift4.text.length>0 && gif4.text.length>0 && gift5.text.length<0 && gif5.text.length<0 && gift6.text.length<0 && gif6.text.length<0 && gift7.text.length<0 && gif7.text.length<0 ) {
-        Map<String,String> data = <String,String>{
+      else if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length > 0 && gif1.text.length > 0 &&
+          gift2.text.length > 0 && gif2.text.length > 0 &&
+          gift3.text.length > 0 && gif3.text.length > 0 &&
+          gift4.text.length > 0 && gif4.text.length > 0 &&
+          gift5.text.length <= 0 && gif5.text.length <= 0 &&
+          gift6.text.length <= 0 && gif6.text.length <= 0 &&
+          gift7.text.length <= 0 && gif7.text.length <= 0) {
+        Map<String, String> data = <String, String>{
           "item0": gift0.text,
           "link0": gif0.text,
           "item1": gift1.text,
@@ -203,13 +258,20 @@ _sending(){
           "item4": gift4.text,
           "link4": gif4.text,
         };
-        documentReference.setData(data).whenComplete(()async{
+        documentReference.setData(data).whenComplete(() async {
           await print("Document Added");
-        }).catchError((e){
+        }).catchError((e) {
           print(e);
         });
-      }else  if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length>0 && gif1.text.length>0 && gift2.text.length>0 && gif2.text.length>0 && gift3.text.length>0 && gif3.text.length>0 && gift4.text.length<0 && gif4.text.length<0 && gift5.text.length<0 && gif5.text.length<0 && gift6.text.length<0 && gif6.text.length<0 && gift7.text.length<0 && gif7.text.length<0 ) {
-        Map<String,String> data = <String,String>{
+      } else if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length > 0 && gif1.text.length > 0 &&
+          gift2.text.length > 0 && gif2.text.length > 0 &&
+          gift3.text.length > 0 && gif3.text.length > 0 &&
+          gift4.text.length <= 0 && gif4.text.length <= 0 &&
+          gift5.text.length <= 0 && gif5.text.length <= 0 &&
+          gift6.text.length <= 0 && gif6.text.length <= 0 &&
+          gift7.text.length <= 0 && gif7.text.length <= 0) {
+        Map<String, String> data = <String, String>{
           "item0": gift0.text,
           "link0": gif0.text,
           "item1": gift1.text,
@@ -219,14 +281,21 @@ _sending(){
           "item3": gift3.text,
           "link3": gif3.text,
         };
-        documentReference.setData(data).whenComplete(()async{
+        documentReference.setData(data).whenComplete(() async {
           await print("Document Added");
-        }).catchError((e){
+        }).catchError((e) {
           print(e);
         });
       }
-      else  if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length>0 && gif1.text.length>0 && gift2.text.length>0 && gif2.text.length>0 && gift3.text.length<0 && gif3.text.length<0 && gift4.text.length<0 && gif4.text.length<0 && gift5.text.length<0 && gif5.text.length<0 && gift6.text.length<0 && gif6.text.length<0 && gift7.text.length<0 && gif7.text.length<0 ) {
-        Map<String,String> data = <String,String>{
+      else if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length > 0 && gif1.text.length > 0 &&
+          gift2.text.length > 0 && gif2.text.length > 0 &&
+          gift3.text.length <= 0 && gif3.text.length <= 0 &&
+          gift4.text.length <= 0 && gif4.text.length <= 0 &&
+          gift5.text.length <= 0 && gif5.text.length <= 0 &&
+          gift6.text.length <= 0 && gif6.text.length <= 0 &&
+          gift7.text.length <= 0 && gif7.text.length <= 0) {
+        Map<String, String> data = <String, String>{
           "item0": gift0.text,
           "link0": gif0.text,
           "item1": gift1.text,
@@ -234,74 +303,86 @@ _sending(){
           "item2": gift2.text,
           "link2": gif2.text
         };
-        documentReference.setData(data).whenComplete(()async{
+        documentReference.setData(data).whenComplete(() async {
           await print("Document Added");
-        }).catchError((e){
+        }).catchError((e) {
           print(e);
         });
       }
-      else if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length>0 && gif1.text.length>0 && gift2.text.length<0 && gif2.text.length<0 && gift3.text.length<0 && gif3.text.length<0 && gift4.text.length<0 && gif4.text.length<0 && gift5.text.length<0 && gif5.text.length<0 && gift6.text.length<0 && gif6.text.length<0 && gift7.text.length<0 && gif7.text.length<0 ) {
-        Map<String,String> data = <String,String>{
+      else if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length > 0 && gif1.text.length > 0 &&
+          gift2.text.length <= 0 && gif2.text.length <= 0 &&
+          gift3.text.length <= 0 && gif3.text.length <= 0 &&
+          gift4.text.length <= 0 && gif4.text.length <= 0 &&
+          gift5.text.length <= 0 && gif5.text.length <= 0 &&
+          gift6.text.length <= 0 && gif6.text.length <= 0 &&
+          gift7.text.length <= 0 && gif7.text.length <= 0) {
+        Map<String, String> data = <String, String>{
           "item0": gift0.text,
           "link0": gif0.text,
           "item1": gift1.text,
           "link1": gif1.text,
         };
-        documentReference.setData(data).whenComplete(()async{
+        documentReference.setData(data).whenComplete(() async {
           await print("Document Added");
-        }).catchError((e){
+        }).catchError((e) {
           print(e);
         });
       }
-        else if(gift0.text.length>0 && gif0.text.length>0 && gift1.text.length<0 && gif1.text.length<0 && gift2.text.length<0 && gif2.text.length<0 && gift3.text.length<0 && gif3.text.length<0 && gift4.text.length<0 && gif4.text.length<0 && gift5.text.length<0 && gif5.text.length<0 && gift6.text.length<0 && gif6.text.length<0 && gift7.text.length<0 && gif7.text.length<0 ) {
-          Map<String,String> data = <String,String>{
+      else if (gift0.text.length > 0 && gif0.text.length > 0 &&
+          gift1.text.length <= 0 && gif1.text.length <= 0 &&
+          gift2.text.length <= 0 && gif2.text.length <= 0 &&
+          gift3.text.length <= 0 && gif3.text.length <= 0 &&
+          gift4.text.length <= 0 && gif4.text.length <= 0 &&
+          gift5.text.length <= 0 && gif5.text.length <= 0 &&
+          gift6.text.length <= 0 && gif6.text.length <= 0 &&
+          gift7.text.length <= 0 && gif7.text.length <= 0) {
+        Map<String, String> data = <String, String>{
           "item0": gift0.text,
           "link0": gif0.text,
-          };
-          documentReference.setData(data).whenComplete(()async{
+        };
+        documentReference.setData(data).whenComplete(() async {
           await print("Document Added");
-          }).catchError((e){
+        }).catchError((e) {
           print(e);
-          });
-          }
-      else if( gift0.text.length>0 && gif0.text.length<=0 || gif0.text.length>0 && gift0.text.length<=0 )
-      {
-          _show();
+        });
       }
-      else if( gift1.text.length>0 && gif1.text.length<=0 || gif1.text.length>0 && gift1.text.length<=0 )
-      {
+      else if (gift0.text.length > 0 && gif0.text.length <= 0 ||
+          gif0.text.length > 0 && gift0.text.length <= 0) {
         _show();
       }
-      else if( gift2.text.length>0 && gif2.text.length<=0 || gif2.text.length>0 && gift2.text.length<=0 )
-      {
-
+      else if (gift1.text.length > 0 && gif1.text.length <= 0 ||
+          gif1.text.length > 0 && gift1.text.length <= 0) {
         _show();
       }
-      else if( gift3.text.length>0 && gif3.text.length<=0 || gif3.text.length>0 && gift3.text.length<=0 )
-      {
+      else if (gift2.text.length > 0 && gif2.text.length <= 0 ||
+          gif2.text.length > 0 && gift2.text.length <= 0) {
         _show();
       }
-      else if( gift4.text.length>0 && gif4.text.length<=0 || gif4.text.length>0 && gift4.text.length<=0 )
-      {
+      else if (gift3.text.length > 0 && gif3.text.length <= 0 ||
+          gif3.text.length > 0 && gift3.text.length <= 0) {
         _show();
       }
-      else if( gift5.text.length>0 && gif5.text.length<=0 || gif5.text.length>0 && gift5.text.length<=0 )
-      {
+      else if (gift4.text.length > 0 && gif4.text.length <= 0 ||
+          gif4.text.length > 0 && gift4.text.length <= 0) {
         _show();
       }
-      else if( gift6.text.length>0 && gif6.text.length<=0 || gif6.text.length>0 && gift6.text.length<=0 )
-      {
+      else if (gift5.text.length > 0 && gif5.text.length <= 0 ||
+          gif5.text.length > 0 && gift5.text.length <= 0) {
         _show();
       }
-      else if( gift7.text.length>0 && gif7.text.length<=0 || gif7.text.length>0 && gift7.text.length<=0 )
-      {
+      else if (gift6.text.length > 0 && gif6.text.length <= 0 ||
+          gif6.text.length > 0 && gift6.text.length <= 0) {
         _show();
       }
-      else
-      {
+      else if (gift7.text.length > 0 && gif7.text.length <= 0 ||
+          gif7.text.length > 0 && gift7.text.length <= 0) {
+        _show();
+      }
+      else {
         _showTime();
       }
-
+    }
 }
   @override
   Widget build(BuildContext context) {
