@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class clean extends StatefulWidget{
   @override
@@ -8,11 +9,28 @@ class clean extends StatefulWidget{
 }
 
 class cleans extends State<clean> {
+
   final title = TextEditingController();
+  final gift0 = TextEditingController(text: null);
   final gift1 = TextEditingController();
+  final gift3 = TextEditingController();
+  final gift2 = TextEditingController();
+  final gift7 = TextEditingController();
+  final gift4 = TextEditingController();
+  final gift5 = TextEditingController();
+  final gift6 = TextEditingController();
+  final gif1 = TextEditingController();
+  final gif3 = TextEditingController();
+  final gif2 = TextEditingController();
+  final gif7 = TextEditingController();
+  final gif4 = TextEditingController();
+  final gif5 = TextEditingController();
+  final gif6 = TextEditingController();
+  final gif0 = TextEditingController(text: null);
+
   List<String> _list = ['Private','Public'];
   String _selected_list;
-  int count = 6;
+
 
   _showalert(){
     return showDialog (
@@ -22,7 +40,7 @@ class cleans extends State<clean> {
           title: new Text("Paste Link"
           ),
           content:  TextFormField(
-            //   controller: title,
+             controller: gif0,
               decoration: new InputDecoration(
                   hintText: "Paste here",
                   fillColor:  Colors.white,
@@ -55,7 +73,53 @@ class cleans extends State<clean> {
         )
     );
   }
+  _show(){
+    return showDialog (
+        context: context,
+        barrierDismissible: true,
+        child: AlertDialog(
+          title: new Text("Error",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18.0),
+          ),
+          content: Text("Incomplete form.Check the Add Link or the Text space."),
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: (){
+                  Navigator.of(context,rootNavigator: true).pop(context);
+                },
+                child: Text("Cancel",style: TextStyle(
+                    color: Colors.red
+                ),
+                )
+            )
+          ],
+        )
+    );
+  }
+_sending(){
+  final DocumentReference documentReference = Firestore.instance.collection("Dennis").document(title.text);
+      if(gift0.text.length>0 && gif0.text.length>0 ) {
+      Map<String,String> data = <String,String>{
+        "item0": gift0.text,
+        "link0": gif0.text
+      };
+      documentReference.setData(data).whenComplete((){
+        print("Document Added");
+      }).catchError((e){
+        print(e);
+      });
+      }
+      else if( gift0.text.length>0 && gif0.text.length<=0 || gif0.text.length>0 && gift0.text.length<=0 )
+      {
+          _show();
+      }
+      else
+        {
+          void _null(){
 
+          }
+        }
+
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +130,48 @@ class cleans extends State<clean> {
                 expandedHeight: 200.0,
                 floating: false,
                 pinned: false,
+                actions: <Widget>[
+                  IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: (){
+//                        return new  Row(
+//                          mainAxisAlignment: MainAxisAlignment.center,
+//                          children: <Widget>[
+//                            Text("SHARE WITH:", style:
+//                            TextStyle(
+//                                color: Colors.black,
+//                                fontWeight: FontWeight.bold,
+//                                fontSize: 18
+//                            ),
+//                            ),
+//                            SizedBox(width: 25,),
+//                            Flexible(
+//                                child: DropdownButton(
+//                                  items: _list.map((list){
+//                                    return DropdownMenuItem(child: new Text(list,
+//                                      style:
+//                                      TextStyle(
+//                                          color: Colors.black,
+//                                          fontWeight: FontWeight.bold,
+//                                          fontSize: 16
+//                                      ),
+//                                    ),
+//                                      value: list,
+//                                    );
+//                                  }).toList(),
+//                                  onChanged: (newValue){
+//                                    setState(() {
+//                                      _selected_list = newValue;
+//                                    });
+//                                  },
+//                                  hint: Text('Public'),
+//                                  value: _selected_list,
+//                                )
+//                            )
+//                          ],
+//                        );
+                      })
+                ],
                 flexibleSpace: FlexibleSpaceBar(
                   title: Text("CREATE YOUR WISHLIST", style: TextStyle(
                       color: Colors.black,
@@ -78,12 +184,16 @@ class cleans extends State<clean> {
                         Icons.people, size: constraint.biggest.height);
                   }),
                 ),
-              )
+              ),
+
             ];
           },
-          body: SingleChildScrollView(
+          body: GestureDetector(
+              onTap:(){
+                FocusScope.of(context).requestFocus(new FocusNode());
+              } ,
+            child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-            child: Container(
               padding: EdgeInsets.only(left: 150,right: 150,top: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -155,7 +265,7 @@ class cleans extends State<clean> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Expanded(
-                          child: TextFormField( controller: gift1,
+                          child: TextFormField( controller: gift0,
                             decoration: new InputDecoration(
                               hintText: "Enter gift",
                               fillColor:  Colors.white,
@@ -351,8 +461,18 @@ class cleans extends State<clean> {
                         ),
                       ))
                     ],
+                  ),
+                  SizedBox(height: 20),
+                  FlatButton(onPressed: (){
+                   _sending();
+                   //notification to say data is saved.
+                  }, child: Text("SAVE WISHLIST",
+                  style: TextStyle(color: Colors.blue,
+                  fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  ),
                   )
-
+                  )
                 ],
               ),
             ),
@@ -361,67 +481,3 @@ class cleans extends State<clean> {
   }
 }
 
-// Widget _buildList(TextEditingController title,BuildContext context){
-//  return Row(
-//    children: <Widget>[
-//      Expanded(
-//          child: ListTile(
-//        title: TextFormField(
-//    controller: title,
-//    decoration: new InputDecoration(
-//        hintText: "Enter gift",
-//        fillColor:  Colors.white,
-//        border: new OutlineInputBorder(
-//          borderRadius: new BorderRadius.circular(25.0),
-//          borderSide: new BorderSide(),
-//        )
-//          )
-//            ),
-//            trailing: _showAlert(context),
-//              )
-//                )
-//    ],
-//  );
-//}
-//_showAlert()
-//{
-//  return showDialog (
-//      context: context,
-//      barrierDismissible: true,
-//      child: AlertDialog(
-//        title: new Text("Paste Link"
-//        ),
-//        content:  TextFormField(
-//         //   controller: title,
-//            decoration: new InputDecoration(
-//                hintText: "Paste here",
-//                fillColor:  Colors.white,
-//                border: new OutlineInputBorder(
-//                  borderRadius: new BorderRadius.circular(25.0),
-//                  borderSide: new BorderSide(),
-//                )
-//            )
-//        ),
-//        actions: <Widget>[
-//          new FlatButton(
-//              onPressed: (){
-//                Navigator.of(context,rootNavigator: true).pop(context);
-//              },
-//              child: Text("Cancel",style: TextStyle(
-//                  color: Colors.red
-//              ),
-//              )
-//          ),
-//          new FlatButton(
-//              onPressed: (){
-//               //
-//              },
-//              child: Text("Save",style: TextStyle(
-//                  color: Colors.black
-//              ),
-//              )
-//          ),
-//        ],
-//      )
-//  );
-//}
