@@ -9,8 +9,52 @@ class clean extends StatefulWidget{
 
 class cleans extends State<clean> {
   final title = TextEditingController();
+  final gift1 = TextEditingController();
   List<String> _list = ['Private','Public'];
   String _selected_list;
+  int count = 6;
+
+  _showalert(){
+    return showDialog (
+        context: context,
+        barrierDismissible: true,
+        child: AlertDialog(
+          title: new Text("Paste Link"
+          ),
+          content:  TextFormField(
+            //   controller: title,
+              decoration: new InputDecoration(
+                  hintText: "Paste here",
+                  fillColor:  Colors.white,
+                  border: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                    borderSide: new BorderSide(),
+                  )
+              )
+          ),
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: (){
+                  Navigator.of(context,rootNavigator: true).pop(context);
+                },
+                child: Text("Cancel",style: TextStyle(
+                    color: Colors.red
+                ),
+                )
+            ),
+            new FlatButton(
+                onPressed: (){
+                  Navigator.of(context,rootNavigator: true).pop(context);
+                },
+                child: Text("Save",style: TextStyle(
+                    color: Colors.black
+                ),
+                )
+            ),
+          ],
+        )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +81,10 @@ class cleans extends State<clean> {
               )
             ];
           },
-          body: Center(
+          body: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
             child: Container(
-
-              padding: EdgeInsets.only(left: 150,right: 150,top: 40 ),
+              padding: EdgeInsets.only(left: 150,right: 150,top: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -106,6 +150,209 @@ class cleans extends State<clean> {
                       )
                     ],
                   ),
+                SizedBox(height: 45),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 15
+                      ),
+                      ))
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontSize: 15
+                        ),
+                      ))
+                    ],
+                  ), SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontSize: 15
+                        ),
+                      ))
+                    ],
+                  ), SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontSize: 15
+                        ),
+                      ))
+                    ],
+                  ), SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontSize: 15
+                        ),
+                      ))
+                    ],
+                  ), SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontSize: 15
+                        ),
+                      ))
+                    ],
+                  ), SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontSize: 15
+                        ),
+                      ))
+                    ],
+                  ), SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                          child: TextFormField( controller: gift1,
+                            decoration: new InputDecoration(
+                              hintText: "Enter gift",
+                              fillColor:  Colors.white,
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: new BorderSide(),
+                              ),
+                            ),)
+                      ),
+                      FlatButton(onPressed: (){
+                        _showalert();
+                      }, child: Text("Add Link",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontSize: 15
+                        ),
+                      ))
+                    ],
+                  )
+
                 ],
               ),
             ),
@@ -113,3 +360,68 @@ class cleans extends State<clean> {
         ));
   }
 }
+
+// Widget _buildList(TextEditingController title,BuildContext context){
+//  return Row(
+//    children: <Widget>[
+//      Expanded(
+//          child: ListTile(
+//        title: TextFormField(
+//    controller: title,
+//    decoration: new InputDecoration(
+//        hintText: "Enter gift",
+//        fillColor:  Colors.white,
+//        border: new OutlineInputBorder(
+//          borderRadius: new BorderRadius.circular(25.0),
+//          borderSide: new BorderSide(),
+//        )
+//          )
+//            ),
+//            trailing: _showAlert(context),
+//              )
+//                )
+//    ],
+//  );
+//}
+//_showAlert()
+//{
+//  return showDialog (
+//      context: context,
+//      barrierDismissible: true,
+//      child: AlertDialog(
+//        title: new Text("Paste Link"
+//        ),
+//        content:  TextFormField(
+//         //   controller: title,
+//            decoration: new InputDecoration(
+//                hintText: "Paste here",
+//                fillColor:  Colors.white,
+//                border: new OutlineInputBorder(
+//                  borderRadius: new BorderRadius.circular(25.0),
+//                  borderSide: new BorderSide(),
+//                )
+//            )
+//        ),
+//        actions: <Widget>[
+//          new FlatButton(
+//              onPressed: (){
+//                Navigator.of(context,rootNavigator: true).pop(context);
+//              },
+//              child: Text("Cancel",style: TextStyle(
+//                  color: Colors.red
+//              ),
+//              )
+//          ),
+//          new FlatButton(
+//              onPressed: (){
+//               //
+//              },
+//              child: Text("Save",style: TextStyle(
+//                  color: Colors.black
+//              ),
+//              )
+//          ),
+//        ],
+//      )
+//  );
+//}

@@ -51,7 +51,9 @@ class thirds extends State<third>
     );
   }
   else{
-    return null;
+    return  new ListTile(
+      title: Text(""),
+    );
   }
 
 
@@ -133,7 +135,6 @@ class thirds extends State<third>
                     ),
                     Expanded(
                         child:  ListView.builder(
-                            itemCount: 2,
                         itemBuilder:  (BuildContext context, int index){
                          return FutureBuilder(
                           future: gettting(widget.Doc) ,
