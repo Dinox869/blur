@@ -3,6 +3,7 @@ import 'package:blur/create.dart';
 import 'package:blur/profile.dart';
 import 'package:blur/first.dart';
 import 'package:blur/settings.dart';
+import 'package:blur/icon_profile.dart';
 
 class research extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class _HomePageState extends State<research> {
       case 2:
         return clean();
       case 3:
-        return settings();
+        return icon_profile();
     }
 
     throw "Invalid index $index";
