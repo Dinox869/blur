@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:blur/second_2.dart';
 
 
 class icon_profile extends StatefulWidget{
@@ -45,7 +46,9 @@ class icon_profiles extends State<icon_profile>
                   SizedBox(height: 17),
                   ListTile(
                     onTap: (){
-
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>
+                            second2()
+                        ));
                     },
                     selected: true,
                     leading: Text("WISHLISH",
