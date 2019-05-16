@@ -76,7 +76,8 @@ class firsts extends State<first>
           )
         ];
       },
-   body: Container(
+   body: SingleChildScrollView(
+     scrollDirection: Axis.vertical,
      child: Column(
        children: <Widget>[
          Container(
@@ -124,7 +125,7 @@ Widget _buildResultcard(data,BuildContext context){
   return ListTile(
     contentPadding: EdgeInsets.all(35.0),
     leading: CircleAvatar(
-      backgroundImage: NetworkImage(data['url']),
+   //   backgroundImage: NetworkImage(data['url']),
     ),
     title: Text(data['name'],
     style: TextStyle(fontWeight: FontWeight.bold,
@@ -142,23 +143,23 @@ Widget _buildResultcard(data,BuildContext context){
 
     },
     selected: true,
-    trailing:
-    (data['follow'] == "1")?
-        FlatButton.icon(onPressed: (){},
-            icon: Icon(Icons.thumb_down),
-            label: Text("Unfollow",
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 12.0
-            ),
-            )):
-        FlatButton.icon(onPressed: (){}, icon: Icon(Icons.thumb_up), label: Text("Follow",
-            style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 12.0
-        ),))
+//      trailing:
+//    (data['follow'] == "1")?
+//        FlatButton.icon(onPressed: (){},
+//            icon: Icon(Icons.thumb_down),
+//            label: Text("Unfollow",
+//            style: TextStyle(
+//              color: Colors.black,
+//              fontWeight: FontWeight.bold,
+//              fontSize: 12.0
+//            ),
+//            )):
+//        FlatButton.icon(onPressed: (){}, icon: Icon(Icons.thumb_up), label: Text("Follow",
+//            style: TextStyle(
+//            color: Colors.black,
+//            fontWeight: FontWeight.bold,
+//            fontSize: 12.0
+//        ),))
   );
 }
 
