@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:blur/search.dart';
+import 'package:image_picker/image_picker.dart';
 class profile extends StatefulWidget{
   @override
   profiles createState(){
@@ -14,6 +17,64 @@ class profiles extends State<profile>{
   final email = TextEditingController();
   final password = TextEditingController();
   final confirm_password = TextEditingController();
+  Future<File> imagefile;
+
+  _pickimagefromgalley(ImageSource source){
+    setState(() {
+      imagefile = ImagePicker.pickImage(source: source);
+    });
+    }
+
+  Widget showImage(){
+    return FutureBuilder<File>(
+      future: imagefile,
+      builder: (BuildContext context, AsyncSnapshot<File> snapshot){
+        if(snapshot.connectionState == ConnectionState.done && snapshot.data != null  )
+         {
+           return CircleAvatar(
+             radius: 180,
+             backgroundColor: Colors.transparent,
+             child: ClipOval(
+               child: Image.file(
+            snapshot.data,
+            fit: BoxFit.fill,
+            height: 300,
+            width: 300,
+             ),
+
+           )
+           );
+
+//          return Image.file(
+//            snapshot.data,
+//            height: 300,
+//            width: 300,
+//          );
+        }else if(snapshot.error != null){
+          return const Text('Error Picking Image',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black,
+          fontSize: 16,
+            fontWeight: FontWeight.bold
+          ),
+          );
+        }
+        else
+          {
+            return  Container(
+              child: Column(
+                children: <Widget>[
+
+                    Image.asset("assets/person.png",
+                    fit: BoxFit.fill,
+                    ),
+                ],
+              ),
+            );
+          }
+      },
+    );
+  }
 
 
   @override
@@ -34,17 +95,7 @@ class profiles extends State<profile>{
                 fontWeight: FontWeight.bold,
               ),
               ),
-              Container(
-                height: screenSize.height/4.6 ,
-                width: screenSize.width/3.8 ,
-                child: Column(
-                  children: <Widget>[
-                    Image.asset("assets/person.png",
-                    fit: BoxFit.fill,
-                    ),
-                  ],
-                ),
-              ),
+              showImage(),
               InkWell(
                 child: Text("Change",
                   style:TextStyle(
@@ -53,6 +104,7 @@ class profiles extends State<profile>{
                   )
                   ,),
                 onTap: (){
+                  _pickimagefromgalley(ImageSource.gallery);
                   // gallery
                 },
               ),

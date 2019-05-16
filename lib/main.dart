@@ -48,6 +48,13 @@ class MyHomePage extends StatefulWidget
    final GoogleSignIn googleSignIn = new GoogleSignIn();
    bool isLogged = false;
    FacebookLogin fblogin = new FacebookLogin();
+   FirebaseUser myuser;
+
+    Future<void> signOut() async {
+     await fblogin.logOut();
+     await _auth.signOut();
+
+   }
 
    login() async {
      final facebookLogin = new FacebookLogin();
@@ -56,9 +63,10 @@ class MyHomePage extends StatefulWidget
      switch (result.status) {
        case FacebookLoginStatus.loggedIn:
          AuthCredential credential= FacebookAuthProvider.getCredential(accessToken: myToken.token);
-         FirebaseAuth.instance.signInWithCredential(credential);
+         FirebaseUser myuser = await   FirebaseAuth.instance.signInWithCredential(credential);
+
          Navigator.push(context,MaterialPageRoute(builder: (context)=>
-         loginview()
+         loginview(User : myuser)
          ));
          break;
        case FacebookLoginStatus.cancelledByUser:
@@ -132,7 +140,7 @@ class MyHomePage extends StatefulWidget
                       GoogleSignInButton(
                         onPressed: (){
                           //
-                       //   _SignIn().then((FirebaseUser user)=>print(user)).catchError((e)=>print(e));
+                          _SignIn().then((FirebaseUser user)=>print(user)).catchError((e)=>print(e));
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>
                           research()
                           ));
@@ -140,10 +148,10 @@ class MyHomePage extends StatefulWidget
                       ),
                       TwitterSignInButton(
                         onPressed: (){
-                          //
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=>
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>
                           research()
                           ));
+
                         },
                       ),
                     ],

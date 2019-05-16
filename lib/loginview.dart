@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:blur/main.dart';
 
 class loginview extends StatelessWidget
 {
+  final User;
+   loginview({this.User});
+
+
 
   final email = TextEditingController();
   final password = TextEditingController();
+
 
 
 
@@ -26,7 +34,7 @@ class loginview extends StatelessWidget
               TextFormField(
                 controller: email,
                 decoration: new InputDecoration(
-                  labelText: "Enter Email",
+                  labelText: User.displayName,
                   fillColor:  Colors.white,
                   border: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(25.0),
@@ -51,6 +59,8 @@ class loginview extends StatelessWidget
               RaisedButton.icon(
                   onPressed: ()
                   {
+
+
 
                   },
                   icon: Icon(Icons.check,
