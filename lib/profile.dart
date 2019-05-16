@@ -1,7 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:blur/search.dart';
+import 'package:blur/first.dart';
 import 'package:image_picker/image_picker.dart';
 class profile extends StatefulWidget{
   @override
@@ -41,15 +40,8 @@ class profiles extends State<profile>{
             height: 300,
             width: 300,
              ),
-
            )
            );
-
-//          return Image.file(
-//            snapshot.data,
-//            height: 300,
-//            width: 300,
-//          );
         }else if(snapshot.error != null){
           return const Text('Error Picking Image',
           textAlign: TextAlign.center,
@@ -64,7 +56,6 @@ class profiles extends State<profile>{
             return  Container(
               child: Column(
                 children: <Widget>[
-
                     Image.asset("assets/person.png",
                     fit: BoxFit.fill,
                     ),
@@ -74,6 +65,101 @@ class profiles extends State<profile>{
           }
       },
     );
+  }
+
+  _conditions() {
+    if (username.text.length <= 0) {
+      return showDialog(
+          context: context,
+          barrierDismissible: true,
+          child: AlertDialog(
+            title: new Text("Incomplete"
+            ),
+            content: Text("Write Username."),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.of(context,rootNavigator: true).pop(context);
+                  },
+                  child: Text("Ok", style: TextStyle(
+                      color: Colors.black
+                  ),
+                  )
+              ),
+            ],
+          )
+      );
+    }
+    else if (email.text.length <= 0) {
+      return showDialog(
+          context: context,
+          barrierDismissible: true,
+          child: AlertDialog(
+            title: new Text("Incomplete"
+            ),
+            content: Text("Write Email."),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.of(context,rootNavigator: true).pop(context);
+                  },
+                  child: Text("Ok", style: TextStyle(
+                      color: Colors.black
+                  ),
+                  )
+              ),
+            ],
+          )
+      );
+    } else if (password.text != confirm_password.text || password.text.length<=0 || confirm_password.text.length<=0) {
+      return showDialog(
+          context: context,
+          barrierDismissible: true,
+          child: AlertDialog(
+            title: new Text("Incorrect"
+            ),
+            content: Text("Review the Passwords don't match."),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.of(context,rootNavigator: true).pop(context);
+                  },
+                  child: Text("Ok", style: TextStyle(
+                      color: Colors.black
+                  ),
+                  )
+              ),
+            ],
+          )
+      );
+    }else if(isCheck == false){
+      return showDialog(
+          context: context,
+          barrierDismissible: true,
+          child: AlertDialog(
+            title: new Text("Agree"
+            ),
+            content: Text("Agree to the terms and conditions."),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.of(context,rootNavigator: true).pop(context);
+                  },
+                  child: Text("Ok", style: TextStyle(
+                      color: Colors.black
+                  ),
+                  )
+              ),
+            ],
+          )
+      );
+    }
+    else
+      {
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>
+            first()
+        ));
+        }
   }
 
 
@@ -177,18 +263,13 @@ class profiles extends State<profile>{
                   Text("Agree",style: TextStyle(color: Colors.black),)
                 ],
               ),
-//          RaisedButton.icon(
-//              onPressed: ()
-//              {
-//                Navigator.push(context,MaterialPageRoute(builder: (context)=>
-//                    search()
-//                ));
-//              },
-//              color: Colors.blue,
-//              icon: Icon(Icons.arrow_forward),
-//              label: null)
 
-              
+        FlatButton.icon(onPressed: (){
+          _conditions();
+        },
+           padding: EdgeInsets.only(left: 240,top: 40),
+            icon: Icon(Icons.arrow_forward,size: 63,color: Colors.black,),
+            label: Text(""))
             ],
           ),
 
